@@ -1,0 +1,24 @@
+modules:
+  jira:issueAction:
+    - key: clone-issue-and-links-hello-world-issue-action
+      resource: main
+      resolver:
+        function: resolver
+      viewportSize: medium
+      title: clone-issue-and-links
+  function:
+    - key: resolver
+      handler: index.handler
+resources:
+  - key: main
+    path: static/hello-world/build
+permissions:
+  scopes:
+    - read:jira-work
+    - write:jira-work
+app:
+  runtime:
+    name: nodejs24.x
+    memoryMB: 256
+    architecture: arm64
+  id: ari:cloud:ecosystem::app/7766ae18-4297-4672-98bf-02b8db26943b
