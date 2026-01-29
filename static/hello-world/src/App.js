@@ -1,17 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { invoke, view } from '@forge/bridge';
+import React from 'react';
+import { invoke } from '@forge/bridge';
 
 function App() {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    invoke('getText', { example: 'my-invoke-variable' }).then(setData);
-  }, []);
+  const clone = async () => {
+    try {
+      const result = await invoke('cloneIssue');
+      console.log('Clone result:', result);
+      alert(`Cloned from ${result.original}`);
+    } catch (e) {
+      console.error(e);
+      alert('Cloning failed');
+    }
+  };
 
   return (
     <div>
-      <button onClick={() => view.close()}>Close</button>
-      {data ? data : 'Loading...'}
+      <button onClick={clone}>
+        Clone issue with children & links
+      </button>
     </div>
   );
 }
