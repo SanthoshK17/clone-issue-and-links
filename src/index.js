@@ -9,10 +9,7 @@ resolver.define('cloneIssue', async ({ context }) => {
   const res = await requestJira(`/rest/api/3/issue/${issueKey}`);
   const issue = await res.json();
 
-  return {
-    original: issue.key,
-    summary: issue.fields.summary
-  };
+  return { key: issue.key };
 });
 
 export const handler = resolver.getDefinitions();
